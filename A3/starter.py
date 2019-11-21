@@ -22,12 +22,8 @@ class Expr :
 
     # evaluate this expression given the environment of the symTable
     def eval(self, symTable):
-        print("op:")
         op1 = self.op1
         op2 = self.op2
-
-        print(op1)
-        print(op2)
 
         if self.operator == "var":
             return symTable[op1]
@@ -45,8 +41,6 @@ class Stmt :
     def __str__(self):
         others = ""
         for exp in self.exprs:
-            if exp.isdigit():
-                print("FUCK")
             others = others + " " + str(exp)
         return self.keyword + others
 
@@ -54,7 +48,6 @@ class Stmt :
     def perform(self, symTable):
         print ("Doing: " + str(self))
 
-        exprsList = []
         exprs = self.exprs
         print("exprs:")
         print(exprs)
@@ -62,16 +55,10 @@ class Stmt :
             if len(exprs) > 3:
                 internal = Expr(exprs[2], exprs[3], exprs[4]).eval(symTable)
                 print(internal)
-            print(exprs[2])
-            exprs[2]
-            print("Digit:")
-            print(exprs[2])
             print(exprs[2].isdigit())
             if exprs[2].isdigit():
-                print("yesssss")
                 symTable[exprs[0]] = int(exprs[2])
             else:
-                print("no")
                 symTable[exprs[0]] = exprs[2]
 
         print("SymbolTable:")
