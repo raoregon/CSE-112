@@ -83,9 +83,14 @@ class Stmt :
         if self.keyword == 'print':
             print(symTable[exprs[0]])
 
-
+# just a counter so we can see what line we're on when we throw errors
 lineCount = 0
+
+# Takes in our .txt file, and for each line in the file, we run the for loop:
 for line in fileinput.input(sys.argv[1:]):
+
+    # lines.strip() takes the line as a string and removes the whitespace and throws it into a
+    # list called "lines"
     lines = line.strip()
 
     if 'let' in lines:
