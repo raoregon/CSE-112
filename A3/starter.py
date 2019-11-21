@@ -51,10 +51,13 @@ class Stmt :
         exprs = self.exprs
         print("exprs:")
         print(exprs)
+
         if keyword == 'let':
             if len(exprs) > 3:
                 internal = Expr(exprs[2], exprs[3], exprs[4]).eval(symTable)
                 print(internal)
+                exprs[2] = str(internal)
+
             print(exprs[2].isdigit())
             if exprs[2].isdigit():
                 symTable[exprs[0]] = int(exprs[2])
