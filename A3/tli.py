@@ -73,7 +73,8 @@ class Expr :
         elif self.operator == "!=":
             return symTable[op1] != symTable[op2]
         else:
-            return 0
+            print('Syntax error on line {}.'.format(symTable["sListLineCount"] + 1))
+            return sys.exit()
 
 # used to store a parsed TL statement
 class Stmt :
@@ -91,7 +92,9 @@ class Stmt :
     def perform(self, symTable):
         exprs = self.exprs
         if self.keyword == 'let':
+            tempExprs = ""
             if len(exprs) > 3:
+                tempExprs = exprs[2]
                 internal = Expr(exprs[2], exprs[3], exprs[4]).eval(symTable)
                 exprs[2] = str(internal)
 
@@ -103,6 +106,8 @@ class Stmt :
 
                 if is_number(str(exprs[2])):
                     symTable[exprs[0]] = float(exprs[2])
+            if len(tempExprs) > 0:
+                exprs[2] = tempExprs
         # Print
         elif self.keyword == 'print':
             finalPrint = ""
@@ -196,7 +201,8 @@ def main():
 
         # check to make sure keyword is spelled correctly
         if keyword not in legalKeywords:
-            sys.exit('Syntax error on line {}'.format(lineCount+1))
+            print('Syntax error on line {}.'.format(lineCount + 1))
+            sys.exit()
 
         # now that we know the keyword, we get rid of it
         stringList.remove(stringList[0])
@@ -227,10 +233,8 @@ def main():
 
         sListLineCount = symTable["sListLineCount"]
         sList[sListLineCount].perform(symTable)
-
         count = int(sListLineCount) + 1
 
 
 if __name__ == "__main__":
     main()
-
