@@ -38,8 +38,8 @@ class Stmt(keyword: String, exprs: Array[String]){
 	
 	def perform(symTable: Map[Any,Any]){
 		
-		println("keyword: " + keyword )
-		println("exprs: " + exprs.mkString(" "))
+		//println("keyword: " + keyword )
+		//println("exprs: " + exprs.mkString(" "))
 		
 		if (keyword == "let"){
 			var tempExprs = ""
@@ -88,7 +88,7 @@ object TLI {
     	symTable.addOne("sListLineCount" -> 0)
     	
     	// Takes in our .txt file, and for each line in the file, we run the for loop:
-    	var filename = "test.txt"
+    	var filename = args(0)
     	
 		for (line <- Source.fromFile(filename).getLines) {
     		// read in each line and remove all blank spaces and drop in ","
@@ -120,7 +120,7 @@ object TLI {
 
 			// remove keyword from stringList and set it to a new array called stringLists
     		var stringLists = stringList.filter(! _.contains(keyword))
-    		println(stringLists.mkString(" "))
+    		//println(stringLists.mkString(" "))
     		
     		//if (keyword == "print") {
     		//	var printExprs = ""
@@ -134,10 +134,10 @@ object TLI {
     		
     		stringLists.foreach(strings => expression = expression:+ strings)
     		
-    		println("expressions are: " + expression.mkString(" "))
+    		//println("expressions are: " + expression.mkString(" "))
     		
-    		println("expression: " + expression.mkString(" "))
-			println("keyword: " + keyword)
+    		//println("expression: " + expression.mkString(" "))
+			//println("keyword: " + keyword)
 			var statement = new Stmt(keyword, expression)
 			
 			sList = sList:+ statement
